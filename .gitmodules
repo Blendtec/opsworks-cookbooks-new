@@ -1,0 +1,21 @@
+[submodule "yum-epel"]
+	path = yum-epel
+	url = https://github.com/opscode-cookbooks/yum-epel.git
+[submodule "build-essential"]
+	path = build-essential
+	url = https://github.com/opscode-cookbooks/build-essential.git
+[submodule "python"]
+	path = python
+	url = https://github.com/poise/python.git
+[submodule "newrelic"]
+	path = newrelic
+	url = https://github.com/escapestudios-cookbooks/newrelic.git
+[submodule "td-agent"]
+	path = td-agent
+	url = https://github.com/treasure-data/chef-td-agent.git
+[submodule "yum"]
+	path = yum
+	url = https://github.com/opscode-cookbooks/yum.git
+[submodule "apt"]
+	path = apt
+	url = https://github.com/opscode-cookbooks/apt.git
