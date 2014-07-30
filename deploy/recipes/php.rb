@@ -12,7 +12,7 @@ node[:deploy].each do |application, deploy|
     Chef::Log.debug("Skipping deploy::php application #{application} as it is not an PHP app")
     next
   end
-
+  Chef::Log.debug("Running our php deploy script")
   opsworks_deploy_dir do
     user deploy[:user]
     group deploy[:group]
