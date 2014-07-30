@@ -1,0 +1,136 @@
+####
+## Output descriptions:
+##
+
+# Treasure Data (http://www.treasure-data.com/) provides cloud based data
+# analytics platform, which easily stores and processes data from td-agent.
+# FREE plan is also provided.
+# @see http://docs.fluentd.org/articles/http-to-td
+#
+# This section matches events whose tag is td.DATABASE.TABLE
+
+## match tag=debug.** and dump to console
+<match debug.**>
+  type stdout
+</match>
+
+####
+## Apache Access Source:
+##
+<source>
+  type tail
+  format apache2
+  path /var/log/apache/access.log
+  pos_file /var/log/td-agent/apache.access_log.pos
+  tag apache.access
+</source>
+
+####
+## Log Apache Access to S3
+##
+<match apache.access>
+  type s3
+  aws_key_id <%= @key %>
+  aws_sec_key <%= @secret %>
+  s3_bucket <%= @bucket %>
+  s3_endpoint <%= @s3_end_point %>
+  path <%= @path %>
+  s3_object_key_format <%= @apache_access_s3_object_key_format %>
+  buffer_path <%= @apache_access_buffer_path %>
+  time_slice_format <%= @time_slice_format %>
+  time_slice_wait <%= @time_slice_wait %>
+  <%= @time_zone %>
+  buffer_chunk_limit <%= @buffer_chunk_limit %>
+</match>
+
+####
+## Apache Error Source:
+##
+<source>
+  type tail
+  format /^\[[^ ]* (?<time>[^\]]*)\] \[(?<level>[^\]]*)\] (?<message>.*)$/
+  path /var/log/apache2/error.log
+  pos_file /var/log/td-agent/apache.error_log.pos
+  tag apache.error
+</source>
+
+####
+## Log Apache Error to S3
+##
+<match apache.error>
+  type s3
+  aws_key_id <%= @key %>
+  aws_sec_key <%= @secret %>
+  s3_bucket <%= @bucket %>
+  s3_endpoint <%= @s3_end_point %>
+  path <%= @path %>
+  s3_object_key_format <%= @apache_error_s3_object_key_format %>
+  buffer_path <%= @apache_error_buffer_path %>
+  time_slice_format <%= @time_slice_format %>
+  time_slice_wait <%= @time_slice_wait %>
+  <%= @time_zone %>
+  buffer_chunk_limit <%= @buffer_chunk_limit %>
+</match>
+
+####
+## App Access Source:
+##
+<source>
+  type tail
+  format apache2
+  path /var/log/apache2/<%= @application %>-access.log
+  pos_file /var/log/td-agent/<%= @application %>.access_log.pos
+  tag <%= @application %>.access
+</source>
+
+####
+## Log App Access to S3
+##
+<match <%= @application %>.access>
+  type s3
+  aws_key_id <%= @key %>
+  aws_sec_key <%= @secret %>
+  s3_bucket <%= @bucket %>
+  s3_endpoint <%= @s3_end_point %>
+  path <%= @path %>
+  s3_object_key_format <%= @app_access_s3_object_key_format %>
+  buffer_path <%= @app_access_buffer_path %>
+  time_slice_format <%= @time_slice_format %>
+  time_slice_wait <%= @time_slice_wait %>
+  <%= @time_zone %>
+  buffer_chunk_limit <%= @buffer_chunk_limit %>
+</match>
+
+####
+## App Error Source:
+##
+<source>
+  type tail
+  format /^\[[^ ]* (?<time>[^\]]*)\] \[(?<level>[^\]]*)\] (?<message>.*)$/
+  path /var/log/apache2/<%= @application %>-error.log
+  pos_file /var/log/td-agent/<%= @application %>.error_log.pos
+  tag <%= @application %>.error
+</source>
+
+####
+## Log App Error to S3
+##
+<match <%= @application %>.error>
+  type s3
+  aws_key_id <%= @key %>
+  aws_sec_key <%= @secret %>
+  s3_bucket <%= @bucket %>
+  s3_endpoint <%= @s3_end_point %>
+  path <%= @path %>
+  s3_object_key_format <%= @app_error_s3_object_key_format %>
+  buffer_path <%= @app_error_buffer_path %>
+  time_slice_format <%= @time_slice_format %>
+  time_slice_wait <%= @time_slice_wait %>
+  <%= @time_zone %>
+  buffer_chunk_limit <%= @buffer_chunk_limit %>
+</match>
+
+
+
+
+
