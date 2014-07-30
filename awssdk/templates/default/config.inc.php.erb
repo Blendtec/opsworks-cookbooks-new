@@ -1,0 +1,14 @@
+<?php if (!class_exists('CFRuntime')) die('No direct access allowed.');
+
+/**
+ * Set Credentials
+ */
+CFCredentials::set(
+	array (
+		'production' => array (
+			'certificate_authority' => true,
+			'key' => '<%= @key %>',
+			'secret' => '<%= @secret %>'
+		)
+	)
+);

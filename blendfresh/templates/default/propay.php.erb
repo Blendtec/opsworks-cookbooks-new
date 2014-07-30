@@ -1,0 +1,19 @@
+<?php
+/**
+ * App level Configuration for ProPay Plugin
+ *
+ * @category Config
+ * @package  BlendFresh
+ * @author   Blendtec <noreply@blendtec.com>
+ * @license  proprietary http://www.blendtec.com
+ * @link     http://www.blendtec.com
+ */
+
+Configure::write(
+	'ProPay',
+	array(
+            'authenticationToken' => '<%= @propay[:auth_token] %>',
+            'billerAccountId' => '<%= @propay[:biller_account_id] %>',
+            'wsdlUrl' => '<%= @propay[:wsdl_url] %>'
+	)
+);
