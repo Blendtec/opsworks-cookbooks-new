@@ -11,7 +11,6 @@ Chef::Log.info("Composer #{deploy[:deploy_to]}");
     cwd "#{deploy[:deploy_to]}/current"
     code "curl -s https://getcomposer.org/installer | php"
     code "php composer.phar install"
-    EOH
   end
 
 end
