@@ -4,14 +4,13 @@
 #
 
 node[:deploy].each do |app_name, deploy|
-
+Chef::Log.info("Composer #{deploy_to}");
   script "install_composer" do
     interpreter "bash"
     user 'root'
     cwd "#{deploy[:deploy_to]}/current"
-    code <<-EOH
-    curl -s https://getcomposer.org/installer | php
-    php composer.phar install
+    code "curl -s https://getcomposer.org/installer | php"
+    code "php composer.phar install"
     EOH
   end
 
