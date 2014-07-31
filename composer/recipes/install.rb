@@ -4,7 +4,7 @@
 #
 
 node[:deploy].each do |app_name, deploy|
-Chef::Log.info("Composer #{deploy_to}");
+Chef::Log.info("Composer #{deploy[:deploy_to]}");
   script "install_composer" do
     interpreter "bash"
     user 'root'
