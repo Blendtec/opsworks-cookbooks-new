@@ -8,9 +8,7 @@ Chef::Log.info("Composer #{deploy[:deploy_to]}");
   script "install_composer" do
     interpreter "bash"
     user 'root'
-    code "cd ~"
-    code "curl -s http://getcomposer.org/installer | php"
-    code "mv composer.phar /usr/local/bin/composer.phar"
+    code "cd ~ && curl -s http://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer.phar"
   end
 
 end
